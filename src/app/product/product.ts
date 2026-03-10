@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Product } from '../product';
+import { Product } from '../../interfaces/product';
 
 @Component({
   selector: 'app-product',
