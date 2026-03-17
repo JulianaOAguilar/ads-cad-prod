@@ -23,7 +23,7 @@
   <hr>
   <br>
 
-  Total de clientes: {{ clients.length }}
+  Total de clientes: {{ clients().length }}
 <br>
 
   <table class="table">
@@ -36,7 +36,7 @@
       </tr>
     </thead>
     <tbody>
-         <tr *ngFor="let p of clients">
+         <tr *ngFor="let p of clients()">
       <th scope="row">{{p.id}}</th>
       <td>{{p.name}}</td>
       <td>{{p.email}}</td>

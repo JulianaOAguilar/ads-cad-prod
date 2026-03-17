@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Client } from '../../interfaces/client';
+import { CLientService } from '../client-service';
 
 @Component({
   selector: 'app-client-component',
@@ -8,17 +9,15 @@ import { Client } from '../../interfaces/client';
   templateUrl: './client-component.html',
   styleUrl: './client-component.css',
 })
-export class ClientComponent {
-formGroupClient: FormGroup;
+export class ClientComponent implements OnInit {
 
-clients: Client[] = [];
+formGroupClient: FormGroup;
+clients = signal<Client[]>([]);
 
   
-  constructor(private formBuilder: FormBuilder) { //usa injeção de dependências para
-  //utilizar o formbuilder dentro do constructor
+  constructor(private formBuilder: FormBuilder, private service: CLientService) { 
 
-  this.formGroupClient = formBuilder.group({ // constroi o objeto Product, de acordo com
-  //sua interface já definida
+  this.formGroupClient = formBuilder.group({ 
     id: [''],
     name: [''],
     email: [''],
@@ -26,9 +25,22 @@ clients: Client[] = [];
     });
 
   }
+  ngOnInit(): void {
+   this.service.getAllClients().subscribe(
+      { next: json => this.clients.set(json) }
+    );
+  }
 
-   save(){
-    this.clients.push(this.formGroupClient.value); // salva o produto no array de produtos
-    this.formGroupClient.reset(); // reseta o formulário depois de salvar
-    }
+  save() {
+
+    this.service.save(this.formGroupClient.value).subscribe(
+      {
+        next: json => {
+          this.clients.update(clients => [...clients, json]); // atualiza o Signal
+          this.formGroupClient.reset(); // reseta o form
+        }
+      }
+    )
+  }
+
 }
