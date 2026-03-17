@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Product } from '../../interfaces/product';
+import { ProductService } from '../product-service';
 
 @Component({
   selector: 'app-product',
@@ -8,12 +9,14 @@ import { Product } from '../../interfaces/product';
   templateUrl: './product.html',
   styleUrl: './product.css',
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
 
    formGroupProduct: FormGroup;
-    products: Product[] = [];
+   products = signal<Product[]>([]);
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder,
+                private service: ProductService
+    ) {
 
       this.formGroupProduct = formBuilder.group({
         id: [''],
@@ -22,9 +25,16 @@ export class ProductComponent {
         price: []
       });
     }
+    ngOnInit(): void {
+      this.service.getAllProducts().subscribe(
+          {
+              next: json => this.products.set(json)
+          }
+      );
+  }
 
     save(){
-      this.products.push(this.formGroupProduct.value);
+      //this.products.push(this.formGroupProduct.value);
       this.formGroupProduct.reset();
     }
 
