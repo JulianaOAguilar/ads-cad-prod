@@ -2,35 +2,71 @@
   "products": [
     {
       "id": 1,
-      "name": "Product 1",
-      "price": 10.99,
-      "description": "Description for Product 1"
+      "name": "7",
+      "description": "6",
+      "price": "6"
     },
     {
       "id": 2,
-      "name": "Product 2",
-      "price": 20.99,
-      "description": "Description for Product 2"
+      "name": "",
+      "description": "",
+      "price": null
     },
     {
       "id": 3,
-      "name": "Product 3",
-      "price": 30.99,
-      "description": "Description for Product 3"
-    }
-  ],
-  "client": [
-    {
-      "id": 1,
-      "name": "Juliana Aguilar",
-      "email": "Julianaoaguilar16@gmail.com",
-      "phone": "11976959577"
+      "name": "cachoro",
+      "description": "raça vira lata",
+      "price": "89898"
     },
     {
+      "id": 4,
+      "name": "",
+      "description": "",
+      "price": null
+    },
+    {
+      "id": 5,
+      "name": "uiuiui",
+      "description": "uiouiu",
+      "price": "uiouu"
+    },
+    {
+      "id": 6,
+      "name": "",
+      "description": "",
+      "price": null
+    },
+    {
+      "id": 7,
+      "name": null,
+      "description": null,
+      "price": null
+    },
+    {
+      "id": 8,
+      "name": null,
+      "description": null,
+      "price": null
+    }
+  ],
+  "Client": [
+    {
       "id": 2,
-      "name": "glauco",
-      "email": "ghfuytytrgt",
-      "phone": "676544564565465"
+      "name": "7",
+      "email": "7",
+      "phone": "y"
+    },
+    {
+      "id": 3,
+      "name": "78787",
+      "email": "987 987",
+      "phone": "7987987"
+    },
+    {
+      "id": 4,
+      "name": null,
+      "email": null,
+      "phone": null
     }
   ]
 }

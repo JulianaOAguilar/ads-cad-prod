@@ -12,6 +12,7 @@ import { CLientService } from '../client-service';
 export class ClientComponent implements OnInit {
 
 formGroupClient: FormGroup;
+  isEditing: boolean = false;
 clients = signal<Client[]>([]);
 
   
@@ -41,6 +42,33 @@ clients = signal<Client[]>([]);
         }
       }
     )
+  }
+
+   delete(client: Client) {
+    this.service.delete(client).subscribe(
+      {
+        next: () => {
+          this.clients.update(clients => clients.filter(p => p.id != client.id));
+        }
+      }
+    )
+  }
+
+  onClickUpdate(client: Client) {
+     this.formGroupClient.setValue(client);
+     this.isEditing = true;
+  }
+
+     update() {
+this.service.update(this.formGroupClient.value).subscribe(
+        {
+          next: json => {
+            this.clients.update(clients => clients.map(p=> p.id === json.id ? json : p));
+            this.isEditing = false;
+            this.formGroupClient.reset();
+          }
+        }
+      )
   }
 
 }

@@ -17,7 +17,9 @@
       <input formControlName="phone" type="text" class="form-control" id="inputPhone" />
     </div>
 
-    <button (click)="save()" type="submit" class="btn btn-primary">Salvar</button>
+        <button *ngIf="!isEditing"   type="submit" class="btn btn-primary" (click)="save()">Salvar</button>
+    <button *ngIf="isEditing"   type="submit" class="btn btn-primary" (click)="update()">Atualizar</button>
+
   </form>
   <br>
   <hr>
@@ -33,6 +35,7 @@
         <th scope="col">Nome</th>
         <th scope="col">Descrição</th>
         <th scope="col">Preço</th>
+        <th scope="col">Opções</th>
       </tr>
     </thead>
     <tbody>
@@ -41,6 +44,15 @@
       <td>{{p.name}}</td>
       <td>{{p.email}}</td>
       <td>{{p.phone}}</td>
+       <td>
+          <button class="mx-3 btn btn-secondary"(click)="onClickUpdate(p)" >
+            Editar
+          </button>
+
+          <button class="btn btn-danger" (click)="delete(p)">
+            Excluir
+          </button>
+        </td>
     </tr>
     </tbody>
   </table>
